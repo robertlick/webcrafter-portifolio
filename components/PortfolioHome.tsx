@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Briefcase, 
-  Palette, 
-  Send, 
   MessageCircle, 
   Instagram, 
   Mail, 
@@ -38,16 +35,7 @@ const PortfolioHome: React.FC<PortfolioHomeProps> = ({ demos, steps, onViewDemo 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const offset = 100;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
     setMobileMenuOpen(false);
   };
@@ -199,7 +187,7 @@ const PortfolioHome: React.FC<PortfolioHomeProps> = ({ demos, steps, onViewDemo 
       </div>
 
       {/* Hero Section */}
-      <section id="top" className="relative overflow-hidden bg-white pt-40 pb-24 scroll-mt-32">
+      <section id="top" className="relative overflow-hidden bg-white pt-40 pb-24">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-indigo-50/30 z-0"></div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="max-w-3xl">
@@ -226,7 +214,7 @@ const PortfolioHome: React.FC<PortfolioHomeProps> = ({ demos, steps, onViewDemo 
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-24 px-6 max-w-7xl mx-auto scroll-mt-32">
+      <section id="portfolio" className="py-24 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-black mb-6 text-slate-900">Portfólio Premium</h2>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto font-medium">Cada projeto é único, desenhado sob medida para converter visitantes em clientes fiéis.</p>
@@ -246,7 +234,10 @@ const PortfolioHome: React.FC<PortfolioHomeProps> = ({ demos, steps, onViewDemo 
                 <div className="text-[10px] font-black text-blue-600 uppercase tracking-[0.3em] mb-4 bg-blue-50 w-fit px-3 py-1 rounded-full">{demo.category}</div>
                 <h3 className="text-3xl font-black mb-4 text-slate-900">{demo.name}</h3>
                 <p className="text-slate-500 mb-8 flex-1 text-base leading-relaxed font-medium">{demo.description}</p>
-                <button onClick={() => onViewDemo(demo.id)} className="w-full py-5 md:py-4.5 rounded-[1.25rem] bg-slate-900 text-white font-black text-xl md:text-sm hover:bg-blue-600 transition-all flex items-center justify-center gap-3 group/btn hover:shadow-xl hover:shadow-blue-500/20 active:scale-[0.98]">
+                <button 
+                  onClick={() => onViewDemo(demo.id)} 
+                  className="w-full py-5 md:py-4.5 rounded-[1.25rem] bg-slate-900 text-white font-black text-xl md:text-sm hover:bg-blue-600 transition-all flex items-center justify-center gap-3 group/btn hover:shadow-xl hover:shadow-blue-500/20 active:scale-[0.98]"
+                >
                   Ver Projeto Completo <ExternalLink size={20} className="md:size-[18px] group-hover/btn:scale-110 transition-transform" />
                 </button>
               </div>
@@ -256,7 +247,7 @@ const PortfolioHome: React.FC<PortfolioHomeProps> = ({ demos, steps, onViewDemo 
       </section>
 
       {/* Process Section */}
-      <section id="process" className="py-32 bg-slate-900 text-white relative overflow-hidden scroll-mt-32">
+      <section id="process" className="py-32 bg-slate-900 text-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-slate-50 to-transparent opacity-10"></div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-24">
@@ -283,7 +274,7 @@ const PortfolioHome: React.FC<PortfolioHomeProps> = ({ demos, steps, onViewDemo 
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-32 px-6 max-w-6xl mx-auto scroll-mt-32">
+      <section id="contact" className="py-32 px-6 max-w-6xl mx-auto">
         <div className="bg-gradient-to-br from-blue-600 to-indigo-800 rounded-[4rem] p-10 md:p-24 text-center text-white shadow-[0_50px_100px_-20px_rgba(37,99,235,0.4)] relative overflow-hidden group">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5 group-hover:opacity-10 transition-opacity"></div>
           <h2 className="text-4xl md:text-7xl font-black mb-10 relative z-10 leading-tight">Sua visão merece <br className="hidden md:block" /> se tornar realidade.</h2>
@@ -321,7 +312,6 @@ const PortfolioHome: React.FC<PortfolioHomeProps> = ({ demos, steps, onViewDemo 
         </div>
       </footer>
 
-      {/* Estilos Globais Customizados via Style Tag (para Tailwind) */}
       <style>{`
         @keyframes gradient {
           0% { background-position: 0% 50%; }
@@ -340,9 +330,6 @@ const PortfolioHome: React.FC<PortfolioHomeProps> = ({ demos, steps, onViewDemo 
         }
         .ease-spring {
           transition-timing-function: cubic-bezier(0.68, -0.6, 0.32, 1.6);
-        }
-        html {
-          scroll-behavior: smooth;
         }
       `}</style>
     </div>

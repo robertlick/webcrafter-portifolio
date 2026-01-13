@@ -3,9 +3,7 @@ import {
   Sparkles, 
   Instagram, 
   Facebook,
-  Twitter,
   Menu, 
-  ChevronDown, 
   ArrowRight,
   Feather,
   Flower,
@@ -25,12 +23,6 @@ const AestheticsDemo: React.FC = () => {
     container.addEventListener('scroll', handleScroll);
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const scrollToSection = (e: React.MouseEvent, id: string) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
-  };
 
   const services = [
     { 
@@ -66,7 +58,7 @@ const AestheticsDemo: React.FC = () => {
   ];
 
   return (
-    <div id="home" className="font-sans bg-[#111] text-[#333] min-h-full relative flex flex-col">
+    <div className="font-sans bg-[#111] text-[#333] min-h-full relative flex flex-col">
       <div className="bg-[#F9F8F6] relative z-10 rounded-b-[40px] shadow-2xl pb-10">
         
         {/* Navbar */}
@@ -74,7 +66,7 @@ const AestheticsDemo: React.FC = () => {
           scrolled ? 'bg-white/95 backdrop-blur-md py-4 shadow-sm border-[#e5e5e5]' : 'bg-[#F9F8F6] py-8 border-transparent'
         }`}>
           <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
-            <div className="flex items-center gap-2 cursor-pointer" onClick={(e) => scrollToSection(e, 'home')}>
+            <div className="flex items-center gap-2 cursor-pointer">
               <span className="text-2xl font-serif tracking-[0.2em] font-bold text-[#1a1a1a]">LUMIÈRE</span>
             </div>
             <div className="hidden md:flex items-center gap-12">
@@ -109,7 +101,7 @@ const AestheticsDemo: React.FC = () => {
         </header>
 
         {/* Treatments Section */}
-        <section id="treatments" className="py-24 px-6 overflow-hidden">
+        <section className="py-24 px-6 overflow-hidden">
           <div className="max-w-7xl mx-auto mb-16">
             <span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.3em] font-bold block mb-2">Procedimentos</span>
             <h2 className="font-serif text-4xl text-[#1a1a1a]">Nossa Expertise</h2>
