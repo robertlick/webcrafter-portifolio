@@ -1,1 +1,1 @@
-// Todo o código do projeto foi movido para o index.html para garantir o funcionamento total no GitHub Pages sem processos de build.
+// Todo o código está no index.html para garantir funcionamento no GitHub Pages.

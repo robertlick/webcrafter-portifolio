@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebCrafter - Portfólio Premium</title>
+    <title>WebCrafter - Portfólio Digital</title>
     
-    <!-- Scripts Necessários para rodar React direto no HTML -->
+    <!-- React & Babel (Permite rodar JSX direto no HTML) -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Ícones e Fontes -->
+    <!-- Fontes Premium -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <script>
@@ -30,14 +30,17 @@
     <style>
         body { -webkit-font-smoothing: antialiased; }
         section { scroll-margin-top: 100px; }
-        .animate-gradient {
-            background-size: 200% auto;
-            animation: gradient 3s ease infinite;
-        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        
         @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+        .animate-gradient {
+            background-size: 200% auto;
+            animation: gradient 3s ease infinite;
         }
     </style>
 <script type="importmap">
@@ -53,82 +56,74 @@
 <body class="bg-slate-50">
     <div id="root"></div>
 
-    <!-- Todo o código do site abaixo -->
     <script type="text/babel">
         const { useState, useEffect } = React;
-        
-        // --- Ícones Simplificados (SVG Direto para evitar dependências externas que falham) ---
-        const IconCode = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>;
-        const IconX = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>;
-        const IconMenu = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>;
-        const IconExternal = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>;
 
-        // --- DEMOS INTEGRADOS ---
+        // --- Ícones SVG (Embutidos para evitar falhas de carregamento externo) ---
+        const IconCode = () => <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>;
+        const IconX = () => <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>;
+        const IconMenu = () => <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>;
+        const IconExternal = () => <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>;
+        const IconWhatsApp = () => <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>;
 
-      3  const LawFirmDemo = () => (
+        // --- DEMO 1: ADVOCACIA ---
+        const LawFirmDemo = () => (
             <div className="font-serif bg-[#0a0a0a] text-white min-h-screen">
-                <nav className="p-6 flex justify-between items-center bg-black/80 backdrop-blur-md sticky top-0 z-50">
-                    <span className="tracking-[0.2em] font-bold text-xs">DEJOSS ADVOCACIA</span>
-                    <button className="bg-[#d4af37] text-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest">Consultar</button>
+                <nav className="p-6 flex justify-between items-center border-b border-white/10 bg-black/80 backdrop-blur-md sticky top-0 z-50">
+                    <span className="tracking-[0.3em] font-bold text-sm">DEJOSS ADVOCACIA</span>
+                    <button className="bg-[#d4af37] text-black px-6 py-2 text-[10px] font-bold uppercase tracking-widest">Agendar</button>
                 </nav>
-                <div className="h-[70vh] flex items-center px-10 relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?q=80&w=2069&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-30" />
-                    <div className="relative z-10">
-                        <h1 className="text-5xl md:text-7xl mb-6">Justiça com <span className="text-[#d4af37] italic font-light">Excelência</span></h1>
-                        <button className="border border-[#d4af37] text-[#d4af37] px-8 py-3 text-xs uppercase font-bold tracking-widest">Nossas Áreas</button>
+                <div className="relative h-[80vh] flex items-center px-10 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?q=80&w=2069&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-40" />
+                    <div className="relative z-10 max-w-2xl">
+                        <h1 className="text-6xl md:text-8xl mb-6 leading-tight">Justiça com <br/><span className="text-[#d4af37] italic">Excelência</span></h1>
+                        <p className="text-xl text-gray-300 mb-8 font-sans font-light">Defesa estratégica e compromisso inabalável com seus direitos.</p>
+                        <button className="border-2 border-[#d4af37] text-[#d4af37] px-10 py-4 font-sans font-bold hover:bg-[#d4af37] hover:text-black transition">Nossas Áreas</button>
                     </div>
                 </div>
             </div>
         );
 
+        // --- DEMO 2: CLÍNICA ---
         const ClinicDemo = () => (
             <div className="font-sans bg-slate-50 text-slate-600 min-h-screen">
-                <nav className="bg-white px-6 h-16 flex justify-between items-center shadow-sm">
-                    <span className="text-xl font-bold text-slate-800">Vita<span className="text-teal-600">Clinic</span></span>
-                    <button className="bg-teal-600 text-white px-5 py-2 rounded-full font-bold text-xs">Agendar</button>
+                <nav className="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100 px-6 h-20 flex justify-between items-center">
+                    <span className="text-xl font-bold text-slate-800 tracking-tight">Vita<span className="text-teal-600">Clinic</span></span>
+                    <button className="bg-teal-600 text-white px-6 py-2 rounded-full font-bold shadow-lg">Agendar Agora</button>
                 </nav>
-                <div className="py-20 px-6 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
-                    <div className="flex-1">
-                        <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6">Sua saúde em <span className="text-teal-500">boas mãos.</span></h1>
-                        <p className="text-lg text-slate-500 mb-8">Atendimento humanizado e tecnologia de ponta.</p>
+                <div className="py-20 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h1 className="text-5xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight">Sua saúde em <br/><span className="text-teal-500">boas mãos.</span></h1>
+                        <p className="text-lg text-slate-500 mb-8">Atendimento humanizado e tecnologia de ponta para cuidar de quem você ama.</p>
                         <button className="bg-teal-600 text-white px-8 py-4 rounded-xl font-bold shadow-lg">Ver Especialidades</button>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop" className="rounded-3xl shadow-xl h-80 w-full md:w-1/2 object-cover" />
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop" className="rounded-[2.5rem] shadow-2xl object-cover h-[400px] md:h-[500px] w-full" />
                 </div>
             </div>
         );
 
+        // --- DEMO 3: ESTÉTICA ---
         const AestheticsDemo = () => (
             <div className="font-sans bg-[#F9F8F6] text-[#1a1a1a] min-h-screen">
-                <nav className="py-6 px-8 flex justify-between items-center">
-                    <span className="text-xl font-serif tracking-[0.3em] font-bold">LUMIÈRE</span>
-                    <button className="border border-black px-6 py-2 text-[10px] uppercase font-bold">Agendar</button>
+                <nav className="py-8 px-8 flex justify-between items-center bg-white/50 backdrop-blur-sm sticky top-0 z-50">
+                    <span className="text-2xl font-serif tracking-[0.3em] font-bold">LUMIÈRE</span>
+                    <button className="border border-[#1a1a1a] px-8 py-3 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-[#1a1a1a] hover:text-white transition">Agendar</button>
                 </nav>
-                <div className="max-w-7xl mx-auto py-16 px-8 flex flex-col md:flex-row items-center gap-10">
-                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop" className="rounded-t-[150px] shadow-2xl h-[500px] w-full md:w-1/2 object-cover" />
-                    <div className="flex-1">
-                        <span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.4em] font-bold block mb-4">Estética de Luxo</span>
-                        <h1 className="font-serif text-5xl md:text-7xl mb-6">Beleza <span className="italic font-light text-gray-400">Atemporal</span></h1>
-                        <button className="bg-black text-white px-8 py-4 text-[10px] uppercase tracking-[0.3em] font-bold">Ver Procedimentos</button>
+                <div className="max-w-7xl mx-auto py-20 px-8 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+                    <div className="order-2 md:order-1">
+                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop" className="rounded-t-[200px] shadow-2xl h-[500px] md:h-[600px] w-full object-cover" />
+                    </div>
+                    <div className="order-1 md:order-2">
+                        <span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.4em] font-bold block mb-6">Estética de Luxo</span>
+                        <h1 className="font-serif text-6xl md:text-8xl leading-[0.9] mb-8">Beleza <br/><span className="italic font-light text-gray-400">Atemporal</span></h1>
+                        <p className="text-lg text-gray-500 font-light mb-10 max-w-sm">Protocolos exclusivos desenhados para realçar sua melhor versão.</p>
+                        <button className="bg-[#1a1a1a] text-white px-10 py-5 text-[10px] uppercase tracking-[0.3em] font-bold">Ver Procedimentos</button>
                     </div>
                 </div>
             </div>
         );
 
-        // --- COMPONENTES PRINCIPAIS ---
-
-        const DemoViewer = ({ component: Component, title, onClose }) => (
-            <div className="fixed inset-0 z-[100] bg-white flex flex-col">
-                <div className="bg-slate-900 text-white p-4 flex justify-between items-center shrink-0">
-                    <button onClick={onClose} className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg text-sm font-bold transition">
-                        <IconX /> Fechar Demo
-                    </button>
-                    <span className="font-bold text-sm">Visualizando: <span className="text-blue-400">{title}</span></span>
-                </div>
-                <div className="flex-1 overflow-auto"><Component /></div>
-            </div>
-        );
-
+        // --- COMPONENTE PRINCIPAL ---
         const PortfolioApp = () => {
             const [isScrolled, setIsScrolled] = useState(false);
             const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -147,74 +142,91 @@
             };
 
             const demos = [
-                { id: 'lawfirm', name: "Dejoss Advocacia", category: "Advocacia", description: "Design sóbrio e autoritário para escritórios jurídicos.", image: "https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?q=80&w=2069&auto=format&fit=crop", component: LawFirmDemo },
-                { id: 'clinic', name: "VitaClinic", category: "Saúde", description: "Interface limpa focada em conversão e agendamentos.", image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop", component: ClinicDemo },
-                { id: 'aesthetics', name: "Lumière Estética", category: "Estética", description: "Visual luxuoso que valoriza a imagem da clínica.", image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop", component: AestheticsDemo }
+                { id: 'lawfirm', name: "Dejoss Advocacia", category: "Advocacia", description: "Design sóbrio e autoritário focado em transmitir segurança jurídica.", image: "https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?q=80&w=2069&auto=format&fit=crop", component: LawFirmDemo },
+                { id: 'clinic', name: "VitaClinic", category: "Saúde", description: "Interface acolhedora e limpa para clínicas e profissionais da saúde.", image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop", component: ClinicDemo },
+                { id: 'aesthetics', name: "Lumière Estética", category: "Estética", description: "Visual luxuoso focado na valorização de procedimentos premium.", image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop", component: AestheticsDemo }
             ];
 
-            if (activeDemo) return <DemoViewer component={activeDemo.component} title={activeDemo.name} onClose={() => setActiveDemo(null)} />;
+            if (activeDemo) {
+                const DemoComponent = activeDemo.component;
+                return (
+                    <div className="fixed inset-0 z-[100] bg-white flex flex-col">
+                        <div className="bg-slate-900 text-white p-4 flex justify-between items-center shadow-lg">
+                            <button onClick={() => setActiveDemo(null)} className="flex items-center gap-2 bg-slate-800 px-6 py-2 rounded-xl font-bold hover:bg-slate-700 transition">
+                                <IconX /> Fechar Demo
+                            </button>
+                            <span className="font-bold text-sm hidden sm:block">Visualizando: <span className="text-blue-400">{activeDemo.name}</span></span>
+                        </div>
+                        <div className="flex-1 overflow-auto"><DemoComponent /></div>
+                    </div>
+                );
+            }
 
             return (
                 <div className="min-h-screen bg-slate-50 font-sans text-slate-900 overflow-x-hidden">
-                    {/* Navbar */}
+                    {/* Floating Navbar */}
                     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 md:p-6 pointer-events-none">
-                        <nav className={`pointer-events-auto flex items-center justify-between transition-all duration-700 rounded-2xl md:rounded-full border ${isScrolled || mobileMenuOpen ? 'w-[92%] md:w-[70%] bg-white/80 backdrop-blur-xl shadow-2xl border-white/40 py-2.5 px-6' : 'w-[95%] md:w-[85%] bg-white/30 backdrop-blur-md border-transparent py-5 px-8'}`}>
-                            <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({top:0, behavior:'smooth'})}>
-                                <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg"><IconCode /></div>
-                                <span className="text-xl font-black tracking-tight">WebCrafter</span>
+                        <nav className={`pointer-events-auto flex items-center justify-between transition-all duration-700 rounded-2xl md:rounded-full border ${isScrolled || mobileMenuOpen ? 'w-[92%] md:w-[75%] bg-white/80 backdrop-blur-xl shadow-2xl border-white/40 py-2.5 px-6' : 'w-[95%] md:w-[85%] bg-white/30 backdrop-blur-md border-transparent py-5 px-8'}`}>
+                            <div className="flex items-center gap-3 cursor-pointer group" onClick={() => window.scrollTo({top:0, behavior:'smooth'})}>
+                                <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform"><IconCode /></div>
+                                <span className="text-xl font-black tracking-tight group-hover:text-blue-600 transition-colors">WebCrafter</span>
                             </div>
                             <div className="hidden md:flex items-center gap-2">
                                 <button onClick={() => scrollToSection('portfolio')} className="px-5 py-2 text-sm font-bold text-slate-600 hover:text-blue-600">Portfólio</button>
+                                <button onClick={() => scrollToSection('process')} className="px-5 py-2 text-sm font-bold text-slate-600 hover:text-blue-600">Processo</button>
                                 <button onClick={() => scrollToSection('contact')} className="px-5 py-2 text-sm font-bold text-slate-600 hover:text-blue-600">Contato</button>
-                                <button onClick={() => scrollToSection('contact')} className="ml-4 bg-slate-900 text-white px-6 py-2.5 rounded-full text-sm font-black hover:bg-blue-600 transition-all active:scale-95">Começar</button>
+                                <button onClick={() => scrollToSection('contact')} className="ml-4 bg-slate-900 text-white px-7 py-2.5 rounded-full text-sm font-black hover:bg-blue-600 transition-all active:scale-95">Começar Projeto</button>
                             </div>
-                            <button className="md:hidden p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>{mobileMenuOpen ? <IconX /> : <IconMenu />}</button>
+                            <button className="md:hidden p-2 bg-slate-100 rounded-xl" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>{mobileMenuOpen ? <IconX /> : <IconMenu />}</button>
                         </nav>
                     </header>
 
-                    {/* Menu Mobile */}
-                    <div className={`fixed inset-x-4 top-24 z-[55] bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl md:hidden transition-all duration-500 ${mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10 pointer-events-none'}`}>
+                    {/* Mobile Menu Overlay */}
+                    <div className={`fixed inset-x-4 top-24 z-[55] bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl md:hidden transition-all duration-500 border border-slate-100 ${mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10 pointer-events-none'}`}>
                         <div className="flex flex-col items-center gap-6 p-10">
-                            <button onClick={() => scrollToSection('portfolio')} className="text-2xl font-black">Portfólio</button>
-                            <button onClick={() => scrollToSection('contact')} className="text-2xl font-black">Contato</button>
-                            <button onClick={() => scrollToSection('contact')} className="w-full bg-blue-600 text-white py-5 rounded-2xl font-black text-xl">Solicitar Site</button>
+                            <button onClick={() => scrollToSection('portfolio')} className="text-2xl font-black text-slate-800">Portfólio</button>
+                            <button onClick={() => scrollToSection('process')} className="text-2xl font-black text-slate-800">Processo</button>
+                            <button onClick={() => scrollToSection('contact')} className="text-2xl font-black text-slate-800">Contato</button>
+                            <button onClick={() => scrollToSection('contact')} className="w-full bg-blue-600 text-white py-5 rounded-2xl font-black text-xl shadow-xl">Solicitar Orçamento</button>
                         </div>
                     </div>
 
-                    {/* Hero */}
+                    {/* Hero Section */}
                     <section className="pt-48 pb-32 px-6 max-w-7xl mx-auto">
-                        <div className="max-w-3xl">
+                        <div className="max-w-3xl relative z-10">
                             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100/50 text-blue-700 text-xs font-black uppercase tracking-widest mb-8">
                                 <IconCode /> <span>Desenvolvimento Web Especializado</span>
                             </div>
-                            <h1 className="text-5xl md:text-8xl font-black mb-8 leading-[1]">Sua marca merece um <span className="text-blue-600">Site Premium</span></h1>
-                            <p className="text-xl md:text-2xl text-slate-500 mb-12 font-medium">Transformamos seu negócio com sites de alto nível, design moderno e tecnologia de ponta.</p>
+                            <h1 className="text-5xl md:text-8xl font-black mb-8 leading-[1] tracking-tight text-slate-900">Sua marca merece um <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 animate-gradient">Site de Alto Nível</span></h1>
+                            <p className="text-xl md:text-2xl text-slate-500 mb-12 max-w-2xl font-medium leading-relaxed">Criamos ferramentas de vendas poderosas com design premium e tecnologia de ponta para destacar seu negócio.</p>
                             <div className="flex flex-col sm:flex-row gap-5">
-                                <button onClick={() => scrollToSection('portfolio')} className="bg-blue-600 text-white px-10 py-5 rounded-2xl font-black text-lg shadow-2xl hover:bg-blue-700 transition-all">Ver Portfólio</button>
-                                <button onClick={() => scrollToSection('contact')} className="bg-white border-2 border-slate-200 px-10 py-5 rounded-2xl font-black text-lg hover:border-blue-400 transition-all">Comece o seu projeto</button>
+                                <button onClick={() => scrollToSection('portfolio')} className="bg-blue-600 text-white px-10 py-5 rounded-2xl font-black text-lg shadow-2xl shadow-blue-500/40 hover:bg-blue-700 transition-all flex items-center justify-center gap-3 active:scale-95">Ver Projetos <IconExternal /></button>
+                                <button onClick={() => scrollToSection('contact')} className="bg-white border-2 border-slate-200 px-10 py-5 rounded-2xl font-black text-lg hover:border-blue-400 hover:text-blue-600 transition-all active:scale-95">Comece o seu projeto</button>
                             </div>
                         </div>
                     </section>
 
-                    {/* Portfolio */}
+                    {/* Portfolio Grid */}
                     <section id="portfolio" className="py-24 px-6 max-w-7xl mx-auto">
                         <div className="text-center mb-20">
-                            <h2 className="text-4xl md:text-6xl font-black mb-6">Projetos Recentes</h2>
-                            <p className="text-lg text-slate-500 max-w-2xl mx-auto">Design sob medida para cada segmento do mercado.</p>
+                            <h2 className="text-4xl md:text-6xl font-black mb-6 text-slate-900 tracking-tight">Portfólio Premium</h2>
+                            <p className="text-lg text-slate-500 max-w-2xl mx-auto font-medium">Cada projeto é desenhado sob medida para converter visitantes em clientes fiéis.</p>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                             {demos.map((demo) => (
-                                <div key={demo.id} className="group bg-white rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100 flex flex-col hover:-translate-y-4 transition-all duration-500">
+                                <div key={demo.id} className="group bg-white rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100 flex flex-col hover:-translate-y-4 transition-all duration-700">
                                     <div className="h-64 relative overflow-hidden cursor-pointer" onClick={() => setActiveDemo(demo)}>
-                                        <img src={demo.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                                        <div className="absolute inset-0 bg-blue-600/20 group-hover:bg-blue-600/40 transition-all" />
+                                        <img src={demo.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+                                        <div className="absolute inset-0 bg-blue-600/10 group-hover:bg-blue-600/30 transition-all flex items-center justify-center">
+                                            <div className="bg-white/90 backdrop-blur-sm px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all">Explorar Demo</div>
+                                        </div>
                                     </div>
                                     <div className="p-10 flex flex-col flex-1">
                                         <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-4 bg-blue-50 px-3 py-1 rounded-full w-fit">{demo.category}</span>
-                                        <h3 className="text-3xl font-black mb-4">{demo.name}</h3>
-                                        <p className="text-slate-500 mb-8 flex-1 leading-relaxed">{demo.description}</p>
+                                        <h3 className="text-3xl font-black mb-4 text-slate-900">{demo.name}</h3>
+                                        <p className="text-slate-500 mb-10 flex-1 leading-relaxed">{demo.description}</p>
                                         <button onClick={() => setActiveDemo(demo)} className="w-full py-5 rounded-2xl bg-slate-900 text-white font-black text-xl md:text-sm hover:bg-blue-600 transition-all flex items-center justify-center gap-3 active:scale-95">
-                                            Ver Projeto Completo <IconExternal />
+                                            Acessar Projeto Completo <IconExternal />
                                         </button>
                                     </div>
                                 </div>
@@ -222,35 +234,40 @@
                         </div>
                     </section>
 
-                    {/* Contato */}
+                    {/* Contact Section */}
                     <section id="contact" className="py-32 px-6 max-w-6xl mx-auto">
-                        <div className="bg-blue-600 rounded-[3rem] p-10 md:p-24 text-center text-white shadow-2xl">
-                            <h2 className="text-4xl md:text-7xl font-black mb-10">Vamos criar algo incrível?</h2>
-                            <p className="text-xl md:text-2xl text-blue-100 mb-16">O próximo nível digital da sua marca começa agora.</p>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <a href="https://wa.me/5521984125259" target="_blank" className="bg-white/10 p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all flex flex-col items-center group">
-                                    <span className="font-black text-xl">WhatsApp</span>
-                                    <span className="text-xs text-blue-200 mt-2 uppercase font-bold tracking-widest">Resposta Imediata</span>
+                        <div className="bg-gradient-to-br from-blue-600 to-indigo-800 rounded-[3rem] md:rounded-[4rem] p-10 md:p-24 text-center text-white shadow-2xl relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                            <h2 className="text-4xl md:text-7xl font-black mb-10 leading-tight relative z-10">Sua visão merece <br/> ser realidade.</h2>
+                            <p className="text-xl md:text-2xl text-blue-100 mb-16 relative z-10 font-medium">O próximo nível digital da sua marca começa com uma conversa.</p>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+                                <a href="https://wa.me/5521984125259" target="_blank" className="bg-white/10 p-10 rounded-[2.5rem] border border-white/20 hover:bg-white/20 transition-all flex flex-col items-center group">
+                                    <IconWhatsApp />
+                                    <span className="font-black text-xl mt-4">WhatsApp</span>
+                                    <span className="text-[10px] text-blue-200 mt-2 uppercase font-bold tracking-widest">Atendimento Online</span>
                                 </a>
-                                <a href="https://instagram.com/rd.webcrafter" target="_blank" className="bg-white/10 p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all flex flex-col items-center group">
-                                    <span className="font-black text-xl">Instagram</span>
-                                    <span className="text-xs text-blue-200 mt-2 uppercase font-bold tracking-widest">Siga nosso trabalho</span>
+                                <a href="https://instagram.com/rd.webcrafter" target="_blank" className="bg-white/10 p-10 rounded-[2.5rem] border border-white/20 hover:bg-white/20 transition-all flex flex-col items-center group">
+                                    <div className="w-8 h-8 rounded-lg border-2 border-white flex items-center justify-center font-black">IG</div>
+                                    <span className="font-black text-xl mt-4">Instagram</span>
+                                    <span className="text-[10px] text-blue-200 mt-2 uppercase font-bold tracking-widest">Siga nosso trabalho</span>
                                 </a>
-                                <a href="mailto:robertfdejoss.webcrafter@gmail.com" className="bg-white/10 p-8 rounded-3xl border border-white/20 hover:bg-white/20 transition-all flex flex-col items-center group">
-                                    <span className="font-black text-xl">E-mail</span>
-                                    <span className="text-xs text-blue-200 mt-2 uppercase font-bold tracking-widest">Solicitar Orçamento</span>
+                                <a href="mailto:robertfdejoss.webcrafter@gmail.com" className="bg-white/10 p-10 rounded-[2.5rem] border border-white/20 hover:bg-white/20 transition-all flex flex-col items-center group">
+                                    <div className="w-8 h-8 rounded-lg border-2 border-white flex items-center justify-center font-black">@</div>
+                                    <span className="font-black text-xl mt-4">E-mail</span>
+                                    <span className="text-[10px] text-blue-200 mt-2 uppercase font-bold tracking-widest">Solicitar Orçamento</span>
                                 </a>
                             </div>
                         </div>
                     </section>
 
-                    <footer className="py-12 text-center text-slate-400 text-xs font-bold uppercase tracking-widest">
-                        &copy; 2024 WEBCRAFTER DIGITAL. TODOS OS DIREITOS RESERVADOS.
+                    <footer className="py-12 text-center text-slate-400 text-xs font-bold uppercase tracking-widest border-t border-slate-100">
+                        &copy; 2024 WEBCRAFTER DIGITAL EXCELLENCE. TODOS OS DIREITOS RESERVADOS.
                     </footer>
                 </div>
             );
         };
 
+        // Renderização Final
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<PortfolioApp />);
     </script>
