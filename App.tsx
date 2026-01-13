@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Briefcase, Palette, Send } from 'lucide-react';
-import { DemoSite, Step } from './types';
-import PortfolioHome from './components/PortfolioHome';
-import DemoViewer from './components/DemoViewer';
-import LawFirmDemo from './demos/LawFirmDemo';
-import ClinicDemo from './demos/ClinicDemo';
-import AestheticsDemo from './demos/AestheticsDemo';
+import { DemoSite, Step } from './types.ts';
+import PortfolioHome from './components/PortfolioHome.tsx';
+import DemoViewer from './components/DemoViewer.tsx';
+import LawFirmDemo from './demos/LawFirmDemo.tsx';
+import ClinicDemo from './demos/ClinicDemo.tsx';
+import AestheticsDemo from './demos/AestheticsDemo.tsx';
 
 // Data Configuration
 const demoSites: DemoSite[] = [
@@ -14,7 +14,6 @@ const demoSites: DemoSite[] = [
     name: "Dejoss Advocacia",
     category: "Advocacia & Jurídico",
     description: "Site institucional que transmite autoridade e confiança. Ideal para escritórios de advocacia e consultoria jurídica.",
-    // Image used as background for the Mini-Hero
     image: "https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?q=80&w=2069&auto=format&fit=crop",
     component: LawFirmDemo
   },
@@ -23,7 +22,6 @@ const demoSites: DemoSite[] = [
     name: "VitaClinic",
     category: "Saúde & Clínicas",
     description: "Design limpo e acolhedor focado na experiência do paciente, com facilidade de agendamento e apresentação do corpo clínico.",
-    // Image used in the split view of Mini-Hero
     image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop",
     component: ClinicDemo
   },
@@ -32,7 +30,6 @@ const demoSites: DemoSite[] = [
     name: "Lumière Estética",
     category: "Estética & Beleza",
     description: "Visual luxuoso e minimalista que valoriza imagens de alta qualidade. Perfeito para clínicas de estética, spas e salões.",
-    // Image used in the arch view of Mini-Hero
     image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop",
     component: AestheticsDemo
   }
@@ -64,7 +61,6 @@ const App: React.FC = () => {
 
   const handleViewDemo = (id: string) => {
     setCurrentView(id);
-    // Scroll to top when opening a demo
     window.scrollTo(0, 0);
   };
 
@@ -72,7 +68,6 @@ const App: React.FC = () => {
     setCurrentView('home');
   };
 
-  // Determine what to render
   const activeDemo = demoSites.find(d => d.id === currentView);
 
   return (
